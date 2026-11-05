@@ -5,16 +5,37 @@ int main(){
     cin.tie(nullptr);
     string s;
     cin>>s;
-    stack <int> st;
+    stack <char> st;
+
     for(int i=0; i<s.size(); i++)
     {
-        if(s[i] == '(')
-            st.push(1);
-        else if(st.empty()){
+        if(s[i] == '(' ||s[i] == '[' || s[i] == '{' )
+            st.push(s[i]);
+        else if(st.empty())
+        {
             cout<<"NO\n";
-            return 0;}
-        else
+            return 0;
+        }
+
+        else  if( (st.top() == '(') && (s[i] == ')'))
+        {
             st.pop();
+        }
+
+        else if(st.top() == '[' && s[i] == ']')
+        {
+            st.pop();
+        }
+        else if(st.top() == '{' && s[i] == '}')
+        {
+            st.pop();
+        }
+        else
+        {
+            cout<<"NO\n";
+            return 0;
+        }
+
     }
     if(st.empty())
         cout<<"YES\n";
